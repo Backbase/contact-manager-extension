@@ -1,4 +1,4 @@
-#contact-manager extension
+# contact-manager extension
 
 [Example Contact Manager Behaviour extensions from Community](https://community.backbase.com/documentation/DBS/latest/contacts_extend_behavior)
 
