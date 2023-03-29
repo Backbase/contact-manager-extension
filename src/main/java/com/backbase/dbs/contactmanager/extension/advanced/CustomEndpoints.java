@@ -4,7 +4,7 @@ package com.backbase.dbs.contactmanager.extension.advanced;
 import com.backbase.buildingblocks.presentation.errors.BadRequestException;
 import com.backbase.dbs.contactmanager.contact.dto.Contact;
 import com.backbase.dbs.contactmanager.contact.dto.InternalRequestWrapper;
-import java.util.Arrays;
+import java.util.List;
 import org.apache.camel.Consume;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +15,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CustomEndpoints {
-
-    public static final String VALIDATION_INTERCEPTOR = "direct:contact.validate.interceptor";
-
+    
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomEndpoints.class);
-
-    private static final String[] HIGH_RISK_COUNTRIES = {"NL"};
+    private static final List<String> HIGH_RISK_COUNTRIES = List.of("NL");
+    public static final String VALIDATION_INTERCEPTOR = "direct:contact.validate.interceptor";
 
     @Consume(VALIDATION_INTERCEPTOR)
     public void executeValidation(InternalRequestWrapper<Contact> internalRequest) {
@@ -33,6 +31,6 @@ public class CustomEndpoints {
     }
 
     private boolean isHighRiskCountry(String countryCode) {
-        return Arrays.asList(HIGH_RISK_COUNTRIES).contains(countryCode);
+        return HIGH_RISK_COUNTRIES.contains(countryCode);
     }
 }
